@@ -1,0 +1,28 @@
+.StartMenueBtn {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: rgb(135, 135, 135);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition-duration: 0.5s;
+}
+
+.StartMenueBtn:focus {
+    background-color: rgb(150, 150, 150);
+    scale: 1.05 1.05;
+}
+
+.StartMenueBtn:hover {
+    background-color: rgb(150, 150, 150);
+    scale: 1.05 1.05;
+}
+
+.StartMenueBtn:active {
+    scale: 1 1;
+}

@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/StartMenu.uss?fileID=7433441132597879392&amp;guid=5c3f4414927f61b4fa451a3f2fb0ed5a&amp;type=3#StartMenu" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; align-items: center; flex-direction: column; justify-content: center; font-size: 60px;">
+        <ui:VisualElement name="Content" style="flex-direction: column;">
+            <ui:Label text="Snake" display-tooltip-when-elided="true" style="-unity-font: none; -unity-font-style: normal; font-size: 200px; -unity-text-align: upper-center;" />
+            <ui:Button text="Start Game" display-tooltip-when-elided="true" name="BtnStartGame" class="StartMenueBtn" />
+            <ui:Button text="Select Game Mode" display-tooltip-when-elided="true" name="BtnSelectGameMode" class="StartMenueBtn" />
+            <ui:Button text="Options" display-tooltip-when-elided="true" name="BtnOptions" class="StartMenueBtn" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="BtnQuit" class="StartMenueBtn" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
