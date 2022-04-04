@@ -24,6 +24,12 @@ namespace NorLib
         [Header("Audio")]
         public AudioMixer AudioMixer;
         public UnityEngine.UI.Slider sliderVolumeMaster;
+        public UnityEngine.UIElements.Slider sliderBackgroundMusic;
+        public UnityEngine.UIElements.Slider sliderSoundEffectMusic;
+
+        public UnityEngine.UIElements.Button muteButton;
+        public UnityEngine.UIElements.Button unmuteButton;
+        private float masterVolumeBeforeMuting = 0f;
 
         [Header("Others")]
         public UnityEngine.UI.Button Refresh;
@@ -47,6 +53,12 @@ namespace NorLib
             dropdownVSyncCount = rve.Q<UnityEngine.UIElements.DropdownField>("NorLibVSync");
             inputFieldFpsLimit = rve.Q<UnityEngine.UIElements.TextField>("NorLibFPSLimit");
             dropdownQuality = rve.Q<UnityEngine.UIElements.DropdownField>("NorLibGraphicsQuality");
+
+            muteButton = rve.Q<UnityEngine.UIElements.Button>("NorLibMute");
+            unmuteButton = rve.Q<UnityEngine.UIElements.Button>("NorLibUnmute");
+
+            sliderBackgroundMusic = rve.Q<UnityEngine.UIElements.Slider>("NorLibBackgroundMusic");
+            sliderSoundEffectMusic = rve.Q<UnityEngine.UIElements.Slider>("NorLibSoundeffectMusic");
 
             RefreshOptions();
             InitCallBacks();
@@ -83,6 +95,46 @@ namespace NorLib
                 {
                     sliderVolumeMaster.value = Mathf.Pow(10, volume / 20);
                     sliderVolumeMaster.minValue = 0.0001f;
+                }
+            }
+
+            if (muteButton is not null && unmuteButton is not null)
+            {
+                float volume;
+                if (AudioMixer.GetFloat("Master_Volume", out volume))
+                {
+                    if (volume < -79.9f)
+                    {
+                        unmuteButton.style.display = DisplayStyle.Flex;
+                        muteButton.style.display = DisplayStyle.None;
+                    }
+                    else
+                    {
+                        unmuteButton.style.display = DisplayStyle.None;
+                        muteButton.style.display = DisplayStyle.Flex;
+                    }
+                }
+            }
+
+            if (sliderBackgroundMusic is not null)
+            {
+                float volume;
+                if (AudioMixer.GetFloat("Music_Volume", out volume))
+                {
+                    sliderBackgroundMusic.value = Mathf.Pow(10, volume / 20);
+                    sliderBackgroundMusic.lowValue = 0.0001f;
+                    sliderBackgroundMusic.highValue = 1f;
+                }
+            }
+
+            if (sliderSoundEffectMusic is not null)
+            {
+                float volume;
+                if (AudioMixer.GetFloat("Sfx_Volume", out volume))
+                {
+                    sliderSoundEffectMusic.value = Mathf.Pow(10, volume / 20);
+                    sliderSoundEffectMusic.lowValue = 0.0001f;
+                    sliderSoundEffectMusic.highValue = 1f;
                 }
             }
 
@@ -149,6 +201,10 @@ namespace NorLib
             dropdownVSyncCount?.RegisterValueChangedCallback(vSyncValueChanged2);
             inputFieldFpsLimit?.RegisterValueChangedCallback(fpsLimitValueChanged2);
             dropdownQuality?.RegisterValueChangedCallback(qualitySettingsChanged2);
+            muteButton?.RegisterCallback<ClickEvent>(muteButtonClicked);
+            unmuteButton?.RegisterCallback<ClickEvent>(unmuteButtonClicked);
+            sliderBackgroundMusic?.RegisterValueChangedCallback(sliderBackgroundMusicValueChanged);
+            sliderSoundEffectMusic?.RegisterValueChangedCallback(sliderSoundEffectValueChanged);
 
             //toggleFullscreen?.onValueChanged.AddListener(fullscreenValueChanged);
             //dropdownQuality?.onValueChanged.AddListener(qualitySettingsChanged);
@@ -158,6 +214,38 @@ namespace NorLib
             //inputFieldFpsLimit?.onValueChanged.AddListener(fpsLimitValueChanged);
             Refresh?.onClick.AddListener(RefreshButtonPressed);
         }
+
+        /*********Music**************/
+        private void muteButtonClicked(ClickEvent evt)
+        {
+            float volume;
+            if (AudioMixer.GetFloat("Master_Volume", out volume))
+            {
+                masterVolumeBeforeMuting = volume;
+            }
+
+            AudioMixer.SetFloat("Master_Volume", -80f);
+            unmuteButton.style.display = DisplayStyle.Flex;
+            muteButton.style.display = DisplayStyle.None;
+        }
+
+        private void unmuteButtonClicked(ClickEvent evt)
+        {
+            AudioMixer.SetFloat("Master_Volume", masterVolumeBeforeMuting);
+            unmuteButton.style.display = DisplayStyle.None;
+            muteButton.style.display = DisplayStyle.Flex;
+        }
+
+        private void sliderBackgroundMusicValueChanged(ChangeEvent<float> evt)
+        {
+            AudioMixer.SetFloat("Music_Volume", Mathf.Log10(evt.newValue) * 20);
+        }
+
+        private void sliderSoundEffectValueChanged(ChangeEvent<float> evt)
+        {
+            AudioMixer.SetFloat("Sfx_Volume", Mathf.Log10(evt.newValue) * 20);
+        }
+        /************************/
 
         private void qualitySettingsChanged2(ChangeEvent<string> evt)
         {
@@ -236,5 +324,6 @@ namespace NorLib
         {
             return vec.x + " x " + vec.y;
         }
+
     }
 }

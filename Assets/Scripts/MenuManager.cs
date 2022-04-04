@@ -9,16 +9,12 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField]
     VisualElement ve;
-
-    Label lblScore;
-    int score = 0;
-
+    List<Label> lblScores;
     GameManager.eGameStarte oldState;
 
     // Start is called before the first frame update
     void Start()
     {
-        lblScore.text = score + "";
     }
 
     // Update is called once per frame
@@ -31,76 +27,80 @@ public class MenuManager : MonoBehaviour
     {
         ve = GetComponent<UIDocument>().rootVisualElement;
 
-        ve.Q<VisualElement>("PlayGameUI").style.display = DisplayStyle.None;
-
         var buttons = ve.Query<Button>();
         foreach (var btn in buttons.ToList())
         {
             btn.RegisterCallback<ClickEvent>((evt) => buttonClicked(btn,evt));
         }
 
-        lblScore = ve.Q<Label>("lbl_Score");
+        lblScores = ve.Query<Label>("lbl_score").ToList();
+
+        foreach(var lblScore in lblScores)
+        {
+            lblScore.text = "0";
+        }
 
         GameManager.StateChanged += GameManager_StateChanged;
-        FruitSystem.FruitConsumed += FruitSystem_FruitConsumed;
+        GameManager.ScoreChanged += GameManager_ScoreChanged;
     }
 
-    private void FruitSystem_FruitConsumed()
+    private void GameManager_ScoreChanged(int newScore)
     {
-        score++;
-        lblScore.text = score + "";
+        foreach(var lblScore in lblScores)
+        {
+            lblScore.text = newScore + "";
+        }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.StateChanged -= GameManager_StateChanged;
+        GameManager.ScoreChanged -= GameManager_ScoreChanged;
     }
 
     private void GameManager_StateChanged(GameManager.eGameStarte newState)
     {
         if(newState == GameManager.eGameStarte.Playing && oldState == GameManager.eGameStarte.StartScreen)
         {
-            score = 0;
-            lblScore.text = score + "";
+            ve.Q<VisualElement>("StartScreenBackground").style.display = DisplayStyle.None;
         }
-         else if (newState == GameManager.eGameStarte.StartScreen)
+        else if (newState == GameManager.eGameStarte.StartScreen)
         {
-            ve.Q<VisualElement>("OptionMenu").style.display = DisplayStyle.None;
-            ve.Q<VisualElement>("Background").style.display = DisplayStyle.Flex;
-            ve.Q<VisualElement>("PlayGameUI").style.display = DisplayStyle.None;
+            ve.Q<VisualElement>("StartScreenBackground").style.display = DisplayStyle.Flex;
         }
+
+        oldState = newState;
     }
 
     private void buttonClicked(Button sender ,ClickEvent evt)
     {
         Debug.Log("clicked: " + sender.name);
 
-        if(sender.name == "start")
+        switch (sender.name)
         {
-            GameManager.StartGame();
-            ve.Q<VisualElement>("OptionMenu").style.display = DisplayStyle.None;
-            ve.Q<VisualElement>("Background").style.display = DisplayStyle.None;
-            ve.Q<VisualElement>("PlayGameUI").style.display = DisplayStyle.Flex;
-        }
-        else if(sender.name == "options")
-        {
-            ve.Q<VisualElement>("OptionMenu").style.display = DisplayStyle.Flex;
-            ve.Q<VisualElement>("MainContent").style.display = DisplayStyle.None;
-            ve.Q<VisualElement>("SecondContent").style.display = DisplayStyle.None;
-        }
-        else if(sender.name == "closeOptions")
-        {
-            ve.Q<VisualElement>("OptionMenu").style.display = DisplayStyle.None;
-            ve.Q<VisualElement>("MainContent").style.display = DisplayStyle.Flex;
-            ve.Q<VisualElement>("SecondContent").style.display = DisplayStyle.Flex;
-            GameManager.ResumeGame();
-        }
-        else if(sender.name ==  "closeGame")
-        {
-            ve.Q<VisualElement>("OptionMenu").style.display = DisplayStyle.None;
-            ve.Q<VisualElement>("Background").style.display = DisplayStyle.Flex;
-            ve.Q<VisualElement>("PlayGameUI").style.display = DisplayStyle.None;
-            GameManager.StopGame();
-        } 
-        else if(sender.name == "optionsGame")
-        {
-            GameManager.PauseGame();
-            ve.Q<VisualElement>("OptionMenu").style.display = DisplayStyle.Flex;
+            case "cmd_play":
+                GameManager.StartGame();
+                break;
+            case "cmd_openOption":
+                GameManager.PauseGame();
+                ve.Q<VisualElement>("OptionsMenu").style.display = DisplayStyle.Flex;
+                ve.Q<VisualElement>("StartScreenBackground").style.display = DisplayStyle.None;
+                break;
+            case "cmd_closeOption":
+                GameManager.ResumeGame();
+                ve.Q<VisualElement>("OptionsMenu").style.display = DisplayStyle.None;
+                if (oldState == GameManager.eGameStarte.StartScreen)
+                {
+                    ve.Q<VisualElement>("StartScreenBackground").style.display = DisplayStyle.Flex;
+                }
+                break;
+            case "cmd_close":
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+                break;
         }
     }
 }

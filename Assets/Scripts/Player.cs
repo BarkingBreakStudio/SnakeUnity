@@ -204,6 +204,7 @@ public class Player : MonoBehaviour
             FruitSys.ConsumeFruit(GetEmptyLocations());
             gt.Interval = (gt.Interval - 0.1f) * 0.95f + 0.1f;
             sfxChannel.Play(SlurpingClip);
+            GameManager.IncreaseScore();
         }
         else
         {

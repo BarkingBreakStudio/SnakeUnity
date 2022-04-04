@@ -13,15 +13,20 @@ public class GameManager
     }
 
     static eGameStarte _gameState = eGameStarte.StartScreen;
+    static int Score;
 
     public delegate void DelStateChanged(eGameStarte newState);
     public static event DelStateChanged StateChanged;
+
+    public delegate void DelScoreCanged(int newScore);
+    public static event DelScoreCanged ScoreChanged;
 
 
     public static void StartGame()
     {
         if(_gameState == eGameStarte.StartScreen)
         {
+            ResetScore();
             setState(eGameStarte.Playing);
         }
     }
@@ -57,6 +62,18 @@ public class GameManager
         setState(eGameStarte.StartScreen);
     }
 
+
+    public static void IncreaseScore()
+    {
+        Score++;
+        ScoreChanged?.Invoke(Score);
+    }
+
+    private static void ResetScore()
+    {
+        Score = 0;
+        ScoreChanged?.Invoke(Score);
+    }
 
 
     private static void setState(eGameStarte state)

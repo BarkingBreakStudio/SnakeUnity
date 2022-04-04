@@ -1,0 +1,141 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/SnakeGameUSS.uss?fileID=7433441132597879392&amp;guid=89c05aefa91f14d419da7365e2a32b33&amp;type=3#SnakeGameUSS" />
+    <ui:VisualElement name="StartScreenBackground" class="DarkeningBackground">
+        <ui:VisualElement name="CenteredContent1" class="CenteredContentWrapper">
+            <ui:VisualElement name="StartScreenImage" class="Blue5Background defaultBorderRadius" style="height: 600px; overflow: hidden;">
+                <ui:VisualElement name="UpperPart" style="flex-grow: 1; justify-content: space-between;">
+                    <ui:VisualElement name="ScoreWrapper" style="align-items: center;">
+                        <ui:VisualElement name="Score" style="align-items: center; margin-top: 77px;">
+                            <ui:VisualElement name="ScoreImage" style="width: 70px; height: 70px; background-color: rgb(231, 71, 29); border-top-left-radius: 52px; border-bottom-left-radius: 52px; border-top-right-radius: 52px; border-bottom-right-radius: 52px;" />
+                            <ui:Label text="1234" display-tooltip-when-elided="true" name="lbl_score" style="color: rgb(255, 255, 255); font-size: 42px; margin-top: 12px;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="SnakeWrapper" style="flex-direction: row; align-items: auto;">
+                        <ui:VisualElement name="SnakeBody1" class="SnakeBody" />
+                        <ui:VisualElement name="SnakeBody2" class="SnakeBody" />
+                        <ui:VisualElement name="SnakeBody3" class="SnakeBody" />
+                        <ui:VisualElement name="SnakeHead" class="SnakeHead" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-top-left-radius: 8px; width: 134px;">
+                            <ui:VisualElement name="Mouth" style="position: absolute; right: 0; bottom: 42px; height: 1px; width: 60px; background-color: rgb(46, 83, 194);">
+                                <ui:VisualElement name="circlepart" style="width: 6px; height: 6px; position: absolute; left: -6px; top: -5px; overflow: hidden;">
+                                    <ui:VisualElement name="cricle" style="width: 12px; height: 12px; position: absolute; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(46, 83, 193); border-right-color: rgb(46, 83, 193); border-top-color: rgb(46, 83, 193); border-bottom-color: rgb(46, 83, 193); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; bottom: 0; left: 0;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="Eye1" style="position: absolute; left: 10px; width: 30px; height: 30px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; background-color: rgb(112, 143, 249); top: -18px; align-items: center; justify-content: center;">
+                                <ui:VisualElement name="eyeball" style="width: 20px; height: 20px; background-color: rgb(255, 255, 255); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; padding-left: 1px;">
+                                    <ui:VisualElement name="iris" style="width: 13px; height: 13px; background-color: rgb(27, 62, 161); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; align-items: center; margin-left: 2px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="Eye2" style="position: absolute; left: 37px; width: 30px; height: 30px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; background-color: rgb(112, 143, 249); top: -18px; align-items: center; justify-content: center;">
+                                <ui:VisualElement name="eyeball" style="width: 20px; height: 20px; background-color: rgb(255, 255, 255); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; padding-left: 1px;">
+                                    <ui:VisualElement name="iris" style="width: 13px; height: 13px; background-color: rgb(27, 62, 161); border-top-left-radius: 20px; border-bottom-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; align-items: center; margin-left: 2px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="Noise1" style="height: 8px; width: 4px; position: absolute; right: 6px; bottom: 70px; background-color: rgb(19, 55, 151); border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 13px; border-bottom-right-radius: 13px;" />
+                            <ui:VisualElement name="Noise2" style="height: 8px; width: 4px; position: absolute; right: 18px; bottom: 70px; background-color: rgb(19, 55, 151); border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 13px; border-bottom-right-radius: 13px;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Ground">
+                    <ui:VisualElement name="Line1" style="flex-direction: row;">
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Line2" style="flex-direction: row;">
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Line3" style="flex-direction: row;">
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Buttons" style="flex-direction: row; margin-top: 12px;">
+                <ui:Button text="Play" display-tooltip-when-elided="true" name="cmd_play" class="BlueButton defaultBorderRadius CursorPointer" style="flex-grow: 1; margin-right: 10px;" />
+                <ui:Button display-tooltip-when-elided="true" name="cmd_openOption" class="BlueButton defaultBorderRadius CursorPointer" style="width: 103px;">
+                    <ui:VisualElement class="CursorPointer" style="background-image: url(&apos;project://database/Assets/Art/Icons/gear__icon.png?fileID=2800000&amp;guid=63ef26e2bb9291c489dafed0681fe987&amp;type=3#gear__icon&apos;); flex-grow: 1; -unity-background-scale-mode: scale-to-fit;" />
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="GameplayHeader" class="Green2Background" style="position: absolute; left: 0; top: 0; right: 0; height: 100px; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="HeaderLeft" style="justify-content: center; flex-direction: row; align-items: center; margin-left: 45px;">
+            <ui:VisualElement name="ScoreImage" style="width: 70px; height: 70px; background-color: rgb(231, 71, 29); border-top-left-radius: 52px; border-bottom-left-radius: 52px; border-top-right-radius: 52px; border-bottom-right-radius: 52px;" />
+            <ui:Label text="1234" display-tooltip-when-elided="true" name="lbl_score" style="color: rgb(255, 255, 255); font-size: 42px; margin-top: 4px; left: 16px; -unity-text-align: upper-left; margin-left: 4px; margin-bottom: 4px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="HeaderRight" style="flex-direction: row-reverse; align-items: center; margin-right: 43px;">
+            <ui:Button display-tooltip-when-elided="true" name="cmd_close" class="TransparentButton">
+                <ui:VisualElement class="CursorPointer" style="background-image: url(&apos;project://database/Assets/Art/Icons/delete.png?fileID=21300000&amp;guid=9e31503fc3c921542a8645517d89c438&amp;type=3#delete&apos;); flex-grow: 1;" />
+            </ui:Button>
+            <ui:Button display-tooltip-when-elided="true" name="cmd_openOption" class="TransparentButton">
+                <ui:VisualElement class="CursorPointer" style="background-image: url(&apos;project://database/Assets/Art/Icons/gear__icon.png?fileID=2800000&amp;guid=63ef26e2bb9291c489dafed0681fe987&amp;type=3#gear__icon&apos;); flex-grow: 1;" />
+            </ui:Button>
+            <ui:Button display-tooltip-when-elided="true" name="NorLibMute" class="TransparentButton">
+                <ui:VisualElement class="CursorPointer" style="background-image: url(&apos;project://database/Assets/Art/Icons/volume-up-2-512.png?fileID=2800000&amp;guid=9a5cf02a5e478ab43a55a3166df0b670&amp;type=3#volume-up-2-512&apos;); flex-grow: 1;" />
+            </ui:Button>
+            <ui:Button display-tooltip-when-elided="true" name="NorLibUnmute" class="TransparentButton">
+                <ui:VisualElement class="CursorPointer" style="background-image: url(&apos;project://database/Assets/Art/Icons/mute-512.png?fileID=2800000&amp;guid=2ff590d1ce0c6764891c1a52f1abe628&amp;type=3#mute-512&apos;); flex-grow: 1;" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="OptionsMenu" class="DarkeningBackground" style="display: none;">
+        <ui:VisualElement name="CenteredContent2" class="CenteredContentWrapper">
+            <ui:VisualElement name="OptionList" class="Blue5Background defaultBorderRadius OptionList">
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:Toggle label="Fullscreen" name="NorLibFullScreen" />
+                </ui:VisualElement>
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="NorLibScreenResolution" />
+                </ui:VisualElement>
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:DropdownField label="V-Sync" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="NorLibVSync" />
+                </ui:VisualElement>
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:TextField picking-mode="Ignore" label="FPS Limit" value="filler text" text="filler text" name="NorLibFPSLimit" />
+                </ui:VisualElement>
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:DropdownField label="Graphics Quality" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="NorLibGraphicsQuality" />
+                </ui:VisualElement>
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:Slider picking-mode="Ignore" label="Background Music" value="42" high-value="100" name="NorLibBackgroundMusic" />
+                </ui:VisualElement>
+                <ui:VisualElement name="OptionElement" class="OptionElement">
+                    <ui:Slider picking-mode="Ignore" label="Soundeffects" value="42" high-value="100" name="NorLibSoundeffectMusic" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Buttons" style="flex-direction: row; margin-top: 12px;">
+                <ui:Button text="close" display-tooltip-when-elided="true" name="cmd_closeOption" class="BlueButton defaultBorderRadius CursorPointer" style="flex-grow: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

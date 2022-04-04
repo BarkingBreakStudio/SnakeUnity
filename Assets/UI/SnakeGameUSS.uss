@@ -1,0 +1,134 @@
+.DarkeningBackground {
+    flex-grow: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.72);
+    align-items: center;
+    justify-content: center;
+}
+
+.CenteredContentWrapper {
+    width: 600px;
+}
+
+.Blue5Background {
+    background-color: rgb(77, 193, 249);
+}
+
+.Ground1 {
+    width: 60px;
+    height: 60px;
+    background-color: rgb(142, 204, 57);
+}
+
+.Ground2 {
+    width: 60px;
+    height: 60px;
+    background-color: rgb(167, 217, 72);
+}
+
+.SnakeBody {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(80, 118, 249);
+}
+
+.SnakeHead {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(112, 143, 249);
+}
+
+.BlueButton {
+    background-color: rgb(17, 85, 204);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    height: 79px;
+    color: rgb(255, 255, 255);
+    font-size: 46px;
+    -unity-font-style: normal;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.defaultBorderRadius {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.Green2Background {
+    background-color: rgb(74, 117, 44);
+}
+
+.TransparentButton {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.CursorPointer {
+    cursor: url('project://database/Assets/Art/Icons/aero_link2.png?fileID=2800000&guid=f712e9ded48754e4692764ab5409a0c1&type=3#aero_link2');
+}
+
+.OptionList {
+    color: rgb(255, 255, 255);
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 22px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.OptionList .unity-base-field__label {
+    width: 50%;
+}
+
+.OptionList .unity-text-field__input {
+    margin-left: 0;
+    background-color: rgb(17, 85, 204);
+}
+
+.OptionList .unity-toggle__input {
+    margin-left: 0;
+}
+
+.OptionList .unity-popup-field__input {
+    margin-left: 0;
+    background-color: rgb(17, 85, 204);
+}
+
+.OptionList .unity-toggle__checkmark {
+    background-color: rgb(17, 85, 204);
+    -unity-background-image-tint-color: white;
+}
+
+.OptionList .unity-base-slider__dragger {
+    background-color: rgb(17, 85, 204);
+}
+
+.OptionList .unity-base-slider__tracker {
+    background-color: rgb(77, 124, 204);
+}
+
+.OptionElement {
+    height: 87px;
+    justify-content: center;
+}

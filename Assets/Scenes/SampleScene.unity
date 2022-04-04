@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 5002d68f6d479684c9c08374990f69f5, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 0566b77ae9045854aaf9ce78140226b2,
+  sourceAsset: {fileID: 9197481963319205126, guid: 1fae93a57a5d13f4986b644849a0adfa,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1900442596
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad786210668c94f45b01186fa63e47cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioMixer: {fileID: 0}
+  AudioMixer: {fileID: 24100000, guid: e2c161a3755b6e64597b84c4a97371f3, type: 2}
   sliderVolumeMaster: {fileID: 0}
   Refresh: {fileID: 0}
 --- !u!1 &2143062594
