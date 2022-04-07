@@ -1,3 +1,4 @@
+using NorLib.Timer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,14 +10,12 @@ public class Player2d : MonoBehaviour
 
     public Vector2Int playFieldSize = new(11, 11);
 
-    public UIDocument UiDoc;
     private VisualElement rve;
-
 
     Queue<Vector2Int> bodyParts = new();
     Vector2Int headPart;
     VisualElement[,] tiles;
-    private GenericTimer movePlayerTimer;
+    GenericTimer movePlayerTimer;
 
 
     Vector2Int moveDir = Vector2Int.right;
@@ -145,9 +144,7 @@ public class Player2d : MonoBehaviour
 
     public void OnEnable()
     {
-        rve = UiDoc.rootVisualElement;
-
-        /**/
+        rve = GetComponent<UIDocument>().rootVisualElement;
         VisualElement gameField = rve.Q("GameField");
 
         /*remove all childs*/
@@ -245,13 +242,9 @@ public class Player2d : MonoBehaviour
         {
             headPart.y = playFieldSize.y-1;
         }
-        tiles[headPart.x, headPart.y].style.backgroundColor = headColor;
-
 
         bodyParts.Enqueue(oldHeadPos);
         tiles[oldHeadPos.x, oldHeadPos.y].style.backgroundColor = bodyColor;
-
-        
         
         if (headPart == fruitPos)
         {
@@ -265,6 +258,8 @@ public class Player2d : MonoBehaviour
             var lastPart = bodyParts.Dequeue();
             tiles[lastPart.x, lastPart.y].style.backgroundColor = StyleKeyword.Null; /*sets the color back to defaul from USS*/
         }
+
+        tiles[headPart.x, headPart.y].style.backgroundColor = headColor;
 
         CheckIfPlayerLost();
     }

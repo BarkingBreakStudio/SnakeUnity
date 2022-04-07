@@ -9,34 +9,26 @@ namespace NorLib
 {
     public class BaseGraphicsSettingsUIToolkit : MonoBehaviour
     {
-
-        
-
-        [Header("Monitor")]
-        public UnityEngine.UIElements.DropdownField dropdownResolutions;
-        public UnityEngine.UIElements.Toggle toggleFullscreen;
-        public UnityEngine.UIElements.DropdownField dropdownVSyncCount;
-        public UnityEngine.UIElements.TextField inputFieldFpsLimit;
-
-        [Header("Graphics")]
-        public UnityEngine.UIElements.DropdownField dropdownQuality;
-
-        [Header("Audio")]
+        /*Screen steetings*/
+        UnityEngine.UIElements.DropdownField dropdownResolutions;
+        UnityEngine.UIElements.Toggle toggleFullscreen;
+        UnityEngine.UIElements.DropdownField dropdownVSyncCount;
+        UnityEngine.UIElements.TextField inputFieldFpsLimit;
+        /*Graphics settings*/
+        UnityEngine.UIElements.DropdownField dropdownQuality;
+        /*Audio slider*/
         public AudioMixer AudioMixer;
-        public UnityEngine.UI.Slider sliderVolumeMaster;
-        public UnityEngine.UIElements.Slider sliderBackgroundMusic;
-        public UnityEngine.UIElements.Slider sliderSoundEffectMusic;
+        UnityEngine.UIElements.Slider sliderBackgroundMusic;
+        UnityEngine.UIElements.Slider sliderSoundEffectMusic;
+        /*Audio mute/unmute*/
+        UnityEngine.UIElements.Button muteButton;
+        UnityEngine.UIElements.Button unmuteButton;
+        float masterVolumeBeforeMuting = 0f;
 
-        public UnityEngine.UIElements.Button muteButton;
-        public UnityEngine.UIElements.Button unmuteButton;
-        private float masterVolumeBeforeMuting = 0f;
+        /*API to change settings*/
+        BaseGraphicsSettings graphicSettings;
 
-        [Header("Others")]
-        public UnityEngine.UI.Button Refresh;
-
-        private BaseGraphicsSettings graphicSettings;
-
-
+        /*poossible screen resolutions*/
         private Vector2Int[] ScreenResolutions;
 
         private void Awake()
@@ -65,13 +57,6 @@ namespace NorLib
         }
 
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            //RefreshOptions();
-            //InitCallBacks();
-        }
-
         public void RefreshOptions()
         {
             if (toggleFullscreen is not null)
@@ -86,16 +71,6 @@ namespace NorLib
                 }
                 dropdownQuality.choices = options;
                 dropdownQuality.index = graphicSettings.GetQualitySettingLevel();
-            }
-
-            if (sliderVolumeMaster)
-            {
-                float volume;
-                if (AudioMixer.GetFloat("Master_Volume", out volume))
-                {
-                    sliderVolumeMaster.value = Mathf.Pow(10, volume / 20);
-                    sliderVolumeMaster.minValue = 0.0001f;
-                }
             }
 
             if (muteButton is not null && unmuteButton is not null)
@@ -156,11 +131,10 @@ namespace NorLib
                     options.Add(curOption);
                     resolutions.Add(curResolution);
                     index = options.Count - 1;
-                    
+
                 }
                 dropdownResolutions.index = index;
                 ScreenResolutions = resolutions.ToArray();
-                //dropdownResolutions.value = index;
             }
 
             if (dropdownVSyncCount is not null)
@@ -180,39 +154,38 @@ namespace NorLib
             }
         }
 
-        private void resolutionValueChanged(int index)
-        {
-            //RemoveCallbacks();
-            graphicSettings.SetCurrentScreen(ScreenResolutions[index]);
-            //InitCallBacks();
-        }
-
-        private void RefreshButtonPressed()
-        {
-            RemoveCallbacks();
-            RefreshOptions();
-            InitCallBacks();
-        }
 
         public void InitCallBacks()
         {
             toggleFullscreen?.RegisterValueChangedCallback(toggleFullscreenValueChanged);
-            dropdownResolutions?.RegisterValueChangedCallback(resolutionValueChanged2);
-            dropdownVSyncCount?.RegisterValueChangedCallback(vSyncValueChanged2);
-            inputFieldFpsLimit?.RegisterValueChangedCallback(fpsLimitValueChanged2);
-            dropdownQuality?.RegisterValueChangedCallback(qualitySettingsChanged2);
+            dropdownResolutions?.RegisterValueChangedCallback(resolutionValueChanged);
+            dropdownVSyncCount?.RegisterValueChangedCallback(vSyncValueChanged);
+            inputFieldFpsLimit?.RegisterValueChangedCallback(fpsLimitValueChanged);
+            dropdownQuality?.RegisterValueChangedCallback(qualitySettingsChanged);
             muteButton?.RegisterCallback<ClickEvent>(muteButtonClicked);
             unmuteButton?.RegisterCallback<ClickEvent>(unmuteButtonClicked);
             sliderBackgroundMusic?.RegisterValueChangedCallback(sliderBackgroundMusicValueChanged);
             sliderSoundEffectMusic?.RegisterValueChangedCallback(sliderSoundEffectValueChanged);
+        }
 
-            //toggleFullscreen?.onValueChanged.AddListener(fullscreenValueChanged);
-            //dropdownQuality?.onValueChanged.AddListener(qualitySettingsChanged);
-            sliderVolumeMaster?.onValueChanged.AddListener(masterVolumeValueChnaged);
-            //dropdownResolutions?.onValueChanged.AddListener(resolutionValueChanged);
-            //dropdownVSyncCount?.onValueChanged.AddListener(vSyncValueChanged);
-            //inputFieldFpsLimit?.onValueChanged.AddListener(fpsLimitValueChanged);
-            Refresh?.onClick.AddListener(RefreshButtonPressed);
+        public void RemoveCallBacks()
+        {
+            toggleFullscreen?.UnregisterValueChangedCallback(toggleFullscreenValueChanged);
+            dropdownResolutions?.UnregisterValueChangedCallback(resolutionValueChanged);
+            dropdownVSyncCount?.UnregisterValueChangedCallback(vSyncValueChanged);
+            inputFieldFpsLimit?.UnregisterValueChangedCallback(fpsLimitValueChanged);
+            dropdownQuality?.UnregisterValueChangedCallback(qualitySettingsChanged);
+            muteButton?.UnregisterCallback<ClickEvent>(muteButtonClicked);
+            unmuteButton?.UnregisterCallback<ClickEvent>(unmuteButtonClicked);
+            sliderBackgroundMusic?.UnregisterValueChangedCallback(sliderBackgroundMusicValueChanged);
+            sliderSoundEffectMusic?.UnregisterValueChangedCallback(sliderSoundEffectValueChanged);
+        }
+
+        public void RefreshGui()
+        {
+            RemoveCallBacks();
+            RefreshOptions();
+            InitCallBacks();
         }
 
         /*********Music**************/
@@ -236,6 +209,11 @@ namespace NorLib
             muteButton.style.display = DisplayStyle.Flex;
         }
 
+        private void masterVolumeValueChnaged(float value)
+        {
+            AudioMixer.SetFloat("Master_Volume", Mathf.Log10(value) * 20);
+        }
+
         private void sliderBackgroundMusicValueChanged(ChangeEvent<float> evt)
         {
             AudioMixer.SetFloat("Music_Volume", Mathf.Log10(evt.newValue) * 20);
@@ -245,84 +223,52 @@ namespace NorLib
         {
             AudioMixer.SetFloat("Sfx_Volume", Mathf.Log10(evt.newValue) * 20);
         }
-        /************************/
-
-        private void qualitySettingsChanged2(ChangeEvent<string> evt)
+        
+        /*******Scrren & Graphics*****************/
+        private void resolutionValueChanged(ChangeEvent<string> evt)
         {
-            qualitySettingsChanged(dropdownQuality.index);
-        }
-
-        private void fpsLimitValueChanged2(ChangeEvent<string> evt)
-        {
-            fpsLimitValueChanged(evt.newValue);
-        }
-
-        private void vSyncValueChanged2(ChangeEvent<string> evt)
-        {
-            vSyncValueChanged(dropdownVSyncCount.index);
-        }
-
-        private void resolutionValueChanged2(ChangeEvent<string> evt)
-        {
-            resolutionValueChanged(dropdownResolutions.index);
+            int index = dropdownResolutions.index;
+            graphicSettings.SetCurrentScreen(ScreenResolutions[index]);
         }
 
         private void toggleFullscreenValueChanged(ChangeEvent<bool> evt)
         {
-            fullscreenValueChanged(evt.newValue);
+            graphicSettings.SetFullscreen(evt.newValue);
         }
 
-        private void fpsLimitValueChanged(string text)
+        private void fpsLimitValueChanged(ChangeEvent<string> evt)
         {
             int limit;
-            if (!int.TryParse(text, out limit))
+            if (!int.TryParse(evt.newValue, out limit))
             {
                 limit = -1;
             }
             graphicSettings.SetFrameLimit(limit);
         }
 
-        private void vSyncValueChanged(int value)
+        private void vSyncValueChanged(ChangeEvent<string> evt)
         {
-            QualitySettings.vSyncCount = value;
+            graphicSettings.SetVsyncCount(dropdownVSyncCount.index);
         }
 
-        public void RemoveCallbacks()
-        {
-            //toggleFullscreen?.onValueChanged.RemoveListener(fullscreenValueChanged);
-            //dropdownQuality?.onValueChanged.RemoveListener(qualitySettingsChanged);
-            sliderVolumeMaster?.onValueChanged.RemoveListener(masterVolumeValueChnaged);
-            //dropdownResolutions?.onValueChanged.RemoveListener(resolutionValueChanged);
-            //dropdownVSyncCount?.onValueChanged.RemoveListener(vSyncValueChanged);
-            //inputFieldFpsLimit?.onValueChanged.RemoveListener(fpsLimitValueChanged);
-            Refresh?.onClick.RemoveListener(RefreshButtonPressed);
-        }
 
-        private void masterVolumeValueChnaged(float value)
+        private void qualitySettingsChanged(ChangeEvent<string> evt)
         {
-            AudioMixer.SetFloat("Master_Volume", Mathf.Log10(value) * 20);
-        }
-
-        private void qualitySettingsChanged(int value)
-        {
-            graphicSettings.SetQualitySettingLevel(value);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        private void fullscreenValueChanged(bool value)
-        {
-            graphicSettings.SetFullscreen(value);
+            int vsyncCount = graphicSettings.GetVsyncCount();
+            graphicSettings.SetQualitySettingLevel(dropdownQuality.index);
+            graphicSettings.SetVsyncCount(vsyncCount);
         }
 
 
         private string Rest2String(Vector2Int vec)
         {
             return vec.x + " x " + vec.y;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
         }
 
     }
