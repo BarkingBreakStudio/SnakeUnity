@@ -477,7 +477,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499029549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51998492f9c379641b11e8bc02e87841, type: 3}
   m_Name: 
@@ -501,6 +501,37 @@ MonoBehaviour:
   SlurpingClip: {fileID: 8300000, guid: bee6be07f924c554db55a87367a65fff, type: 3}
   GameOverClip: {fileID: 8300000, guid: 06b2c0719da9a5e4c977588e5b250815, type: 3}
   sfxChannel: {fileID: 11400000, guid: c9ba5a82ca0639846a7cc27d3db04715, type: 2}
+--- !u!1 &817478610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 817478612}
+  m_Layer: 0
+  m_Name: PLayer2d
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &817478612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817478610}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.77525616, y: -4.5279474, z: -6.725928}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +593,7 @@ GameObject:
   - component: {fileID: 1900442595}
   - component: {fileID: 1900442597}
   - component: {fileID: 1900442598}
+  - component: {fileID: 1900442599}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -628,6 +660,28 @@ MonoBehaviour:
   AudioMixer: {fileID: 24100000, guid: e2c161a3755b6e64597b84c4a97371f3, type: 2}
   sliderVolumeMaster: {fileID: 0}
   Refresh: {fileID: 0}
+--- !u!114 &1900442599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900442594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5226f67967860f45b9c77a240769e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playFieldSize: {x: 11, y: 11}
+  UiDoc: {fileID: 1900442595}
+  DirChangeSoundUpLeftRightDown:
+  - {fileID: 8300000, guid: 2c63436d7e800944f961f45c874a0607, type: 3}
+  - {fileID: 8300000, guid: 9c48485d1de969e47b7109c59dca3225, type: 3}
+  - {fileID: 8300000, guid: 6503a1cae963f784a8f91ac66477fa53, type: 3}
+  - {fileID: 8300000, guid: 6dc1975f9feb24b4d9e65ae3c7060e9f, type: 3}
+  SlurpingClip: {fileID: 8300000, guid: bee6be07f924c554db55a87367a65fff, type: 3}
+  GameOverClip: {fileID: 8300000, guid: 06b2c0719da9a5e4c977588e5b250815, type: 3}
+  sfxChannel: {fileID: 11400000, guid: c9ba5a82ca0639846a7cc27d3db04715, type: 2}
 --- !u!1 &2143062594
 GameObject:
   m_ObjectHideFlags: 0

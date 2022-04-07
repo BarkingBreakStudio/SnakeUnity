@@ -31,8 +31,9 @@ public class GenericTimer : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        enabled = false;
     }
 
     // Update is called once per frame
@@ -41,7 +42,8 @@ public class GenericTimer : MonoBehaviour
         counter += Time.deltaTime;
         if (counter > interval)
         {
-            counter -= interval;
+            //counter -= interval;
+            counter = 0;
             elapsedCallback?.Invoke(this);
         }
     }
@@ -51,6 +53,7 @@ public class GenericTimer : MonoBehaviour
     {
         var gt = go.AddComponent<GenericTimer>();
         gt.Init(elapsedCallback, timerName, interval);
+        gt.enabled = true;
         return gt;
     }
 

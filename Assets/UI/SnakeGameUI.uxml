@@ -1,5 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/SnakeGameUSS.uss?fileID=7433441132597879392&amp;guid=89c05aefa91f14d419da7365e2a32b33&amp;type=3#SnakeGameUSS" />
+    <ui:VisualElement name="Gameplay" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; justify-content: center; align-items: center; display: flex;">
+        <ui:VisualElement name="GameField" style="width: 900px; height: 900px; background-color: rgb(204, 20, 20); margin-top: 150px; margin-bottom: 50px; flex-direction: row;">
+            <ui:VisualElement name="Column" style="flex-grow: 1; flex-direction: column; width: 100%;">
+                <ui:VisualElement name="Tile" style="flex-grow: 1;">
+                    <ui:VisualElement style="flex-grow: 1; -unity-background-image-tint-color: rgba(54, 224, 65, 255); background-color: rgba(52, 202, 81, 255);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Tile" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Column" style="flex-grow: 1; flex-direction: column; background-color: rgb(24, 62, 200); width: 100%;" />
+            <ui:VisualElement name="Column" style="flex-grow: 1; flex-direction: column; width: 100%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
     <ui:VisualElement name="StartScreenBackground" class="DarkeningBackground">
         <ui:VisualElement name="CenteredContent1" class="CenteredContentWrapper">
             <ui:VisualElement name="StartScreenImage" class="Blue5Background defaultBorderRadius" style="height: 600px; overflow: hidden;">
@@ -37,46 +49,40 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="Ground">
                     <ui:VisualElement name="Line1" style="flex-direction: row;">
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
                     </ui:VisualElement>
                     <ui:VisualElement name="Line2" style="flex-direction: row;">
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
                     </ui:VisualElement>
                     <ui:VisualElement name="Line3" style="flex-direction: row;">
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
-                        <ui:VisualElement class="Ground1" />
-                        <ui:VisualElement class="Ground2" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
+                        <ui:VisualElement class="Ground1 Ground" />
+                        <ui:VisualElement class="Ground2 Ground" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -88,13 +94,13 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="GameplayHeader" class="Green2Background" style="position: absolute; left: 0; top: 0; right: 0; height: 100px; flex-direction: row; justify-content: space-between;">
+    <ui:VisualElement name="GameplayHeader" class="Green2Background" style="position: absolute; left: 0; top: 0; right: 0; height: 10%; flex-direction: row; justify-content: space-between;">
         <ui:VisualElement name="HeaderLeft" style="justify-content: center; flex-direction: row; align-items: center; margin-left: 45px;">
             <ui:VisualElement name="ScoreImage" style="width: 70px; height: 70px; background-color: rgb(231, 71, 29); border-top-left-radius: 52px; border-bottom-left-radius: 52px; border-top-right-radius: 52px; border-bottom-right-radius: 52px;" />
             <ui:Label text="1234" display-tooltip-when-elided="true" name="lbl_score" style="color: rgb(255, 255, 255); font-size: 42px; margin-top: 4px; left: 16px; -unity-text-align: upper-left; margin-left: 4px; margin-bottom: 4px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;" />
         </ui:VisualElement>
         <ui:VisualElement name="HeaderRight" style="flex-direction: row-reverse; align-items: center; margin-right: 43px;">
-            <ui:Button display-tooltip-when-elided="true" name="cmd_close" class="TransparentButton">
+            <ui:Button display-tooltip-when-elided="true" name="cmd_close" class="TransparentButton" style="height: 60px; width: 60px;">
                 <ui:VisualElement class="CursorPointer" style="background-image: url(&apos;project://database/Assets/Art/Icons/delete.png?fileID=21300000&amp;guid=9e31503fc3c921542a8645517d89c438&amp;type=3#delete&apos;); flex-grow: 1;" />
             </ui:Button>
             <ui:Button display-tooltip-when-elided="true" name="cmd_openOption" class="TransparentButton">
