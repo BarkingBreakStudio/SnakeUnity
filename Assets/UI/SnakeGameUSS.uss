@@ -135,7 +135,7 @@
 }
 
 .PlayfieldColumn {
-    background-color: rgba(65, 212, 72, 255);
+    background-color: rgb(65, 212, 72);
     flex-grow: 1;
     flex-direction: column-reverse;
     width: 100%;
@@ -147,11 +147,11 @@
 }
 
 .Wall {
-    background-color: rgba(77, 193, 249, 255);
+    background-color: rgb(77, 193, 249);
 }
 
 .Fruit {
-    background-color: rgba(219, 38, 49, 255);
+    background-color: rgb(231, 71, 29);
     border-top-left-radius: 200px;
     border-bottom-left-radius: 200px;
     border-top-right-radius: 200px;
